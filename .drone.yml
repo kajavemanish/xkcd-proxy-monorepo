@@ -22,3 +22,39 @@ steps:
   - cd packages/xkcd-proxy-client
   - npm install
   - npm run test
+
+- name: build-backend
+  image: plugins/docker
+  settings:
+    repo: manishdigithinkit/xkcd-proxy-server
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    dockerfile: packages/xkcd-proxy-server/Dockerfile
+    context: packages/xkcd-proxy-server
+    tags:
+      - edge
+  # when:
+  #   event:
+  #     - push
+  #   branch:
+  #     - staging
+
+- name: build-frontend
+  image: plugins/docker
+  settings:
+    repo: manishdigithinkit/xkcd-proxy-client
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    dockerfile: packages/xkcd-proxy-client/Dockerfile
+    context: packages/xkcd-proxy-client
+    tags:
+      - edge
+  # when:
+  #   event:
+  #     - push
+  #   branch:
+  #     - staging
