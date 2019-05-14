@@ -8,4 +8,4 @@ RUN cd xkcd-proxy-client \
 
 FROM nginx:latest
 COPY --from=0 /home/digithinkit/xkcd-proxy-client/dist /var/www/html
-COPY ./docker/nginx.conf /etc/nginx/conf.d/xkcdproxy.conf
+COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
